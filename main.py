@@ -57,3 +57,13 @@ data = {
 }
 df = pd.DataFrame(data)
 print(df)
+
+# Viewing data
+df = pd.read_csv('data.csv')
+print(df.head(10))  # The head() method returns the headers and a specified number of rows, starting from the top
+
+df = pd.read_csv('data.csv')  # If no number of rows is specified, the head() will return the first five rows
+print(df.head())
+
+print(df.tail())  # The tail() method returns the headers and a specified number of rows, starting from the bottom
+
