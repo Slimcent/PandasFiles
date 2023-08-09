@@ -67,3 +67,40 @@ print(df.head())
 
 print(df.tail())  # The tail() method returns the headers and a specified number of rows, starting from the bottom
 
+print()
+
+# Cleaning data
+df = pd.read_csv('dat.csv')
+new_df = df.dropna()  # Remove rows that contain empty cells
+print(new_df.to_string())  # By default, the dropna() method returns a new DataFrame, and will not change the original
+
+print()
+
+df = pd.read_csv('dat.csv')
+df.dropna(inplace=True)  # inplace = True argument changes the original dataFrame
+print(df.to_string())
+
+# Replace empty cells with values
+df = pd.read_csv('dat.csv')
+df.fillna(130, inplace=True)
+print(df.to_string())
+
+df = pd.read_csv('data.csv')
+df["Calories"].fillna(130, inplace=True)  # Replace only a specific column
+print(df.to_string())  # his operation inserts 130 in empty cells in the "Calories" column
+
+# Replace using the mean, median or mode value of the column
+df = pd.read_csv('data.csv')
+x = df["Calories"].mean()  # Replacing using the mean of the column, Calories
+df["Calories"].fillna(x, inplace=True)
+print(df.to_string())
+
+df = pd.read_csv('data.csv')
+x = df["Calories"].median()  # Replacing using the median of the column, Calories
+df["Calories"].fillna(x, inplace=True)
+print(df.to_string())
+
+df = pd.read_csv('data.csv')
+x = df["Calories"].mode()[0]  # Replacing using the mode of the column, Calories
+df["Calories"].fillna(x, inplace=True)
+print(df.to_string())
