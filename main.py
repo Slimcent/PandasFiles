@@ -100,7 +100,33 @@ x = df["Calories"].median()  # Replacing using the median of the column, Calorie
 df["Calories"].fillna(x, inplace=True)
 print(df.to_string())
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('dat.csv')
 x = df["Calories"].mode()[0]  # Replacing using the mode of the column, Calories
 df["Calories"].fillna(x, inplace=True)
 print(df.to_string())
+
+# Cleaning data of wrong format
+df = pd.read_csv('dat.csv')
+df['Date'] = pd.to_datetime(df['Date'])
+print(df.to_string())
+
+df.dropna(subset=['Date'], inplace=True)  # Removing the row of a wrong data
+
+# Cleaning wrong data by replacing it
+df.loc[7, 'Duration'] = 45
+
+# Replacing large data set by setting a condition
+for x in df.index:
+    if df.loc[x, "Duration"] > 120:  # If the value is higher than 120, set it to 120
+        df.loc[x, "Duration"] = 120
+
+# Deleting large data set by setting a condition
+for x in df.index:
+    if df.loc[x, "Duration"] > 120:  # Delete rows where "Duration" is higher than 120
+        df.drop(x, inplace=True)
+
+# Check duplicates
+print(df.duplicated())
+
+# Removing duplicates
+df.drop_duplicates(inplace=True)
